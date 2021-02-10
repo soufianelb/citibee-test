@@ -14,7 +14,8 @@ namespace citibee_rest_api.Models
         public string Naam { get; set; }
         public string Geolocatie { get; set; }
         public string Adres { get; set; }
-
+        public string Lng { get; set; }
+        public string Lat { get; set; }
         public virtual ICollection<ReserveringItem> ReserveringItem { get; set; }
     }
 }

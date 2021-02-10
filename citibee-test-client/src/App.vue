@@ -25,7 +25,7 @@ export default {
   },
  created(){
    if(this.$store.state.gebruiker!=null){
-     this.gebruikerId =this.this.$store.state.gebruikerId;
+     this.gebruikerId =this.this.$store.state.gebruiker.id;
    }
  },
 methods:{

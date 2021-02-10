@@ -1,19 +1,17 @@
 <template>
-  <div style="height: 40vh">
+  <div class="map">
     <LMap :zoom="zoom" :center="center">
       <LTileLayer :url="url"></LTileLayer>
-      <LMarker :lat-lng="[13.1333682,77.5651881]"></LMarker>
-      <LMarker :lat-lng="[13.1340669,77.56707]"></LMarker>
-      <LMarker :lat-lng="[13.1348904,77.5643231]"></LMarker>
-      <LMarker :lat-lng="[13.1367826,77.5711133]"></LMarker>
+      <div  v-for="item in lijstParkeergarage" :key="item.id">
+    
+      <LMarker :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]"></LMarker>
+    </div>
     </LMap>
   </div>
 </template>
 
 <script>
-//meegeven met props dit public insts string test dit zeker nog als te voren
-
-// na dat alles oke is check alles en doe dan aan error handeling
+ 
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 export default {
   name: "CitibeeMap",
@@ -26,12 +24,25 @@ export default {
   data() {
     return {
       url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      zoom: 16,
-      center: [13.1367826,77.5711133],
+      zoom: 10,
+      center: [51.2103889,4.425369,13],
       bounds: null,
       parkeergarages:[]
     };
   }
+  
 
 };
 </script>
+<style>
+.map{
+    width: 75px;
+    height:100px;
+    top:20%;
+    min-height: 50%;
+    min-width: 100%;
+    position: fixed;
+    float:right;
+    display: block;
+}
+</style>

@@ -98,6 +98,16 @@ namespace citibee_rest_api.Dal
                     .HasColumnName("adres")
                     .HasColumnType("character varying");
 
+                entity.Property(e => e.Lat)
+                   .HasColumnName("lat")
+                   .HasColumnType("character varying");
+
+                entity.Property(e => e.Lng)
+                   .HasColumnName("lng")
+                   .HasColumnType("character varying");
+
+
+
                 entity.Property(e => e.Geolocatie)
                     .IsRequired()
                     .HasColumnName("geolocatie")
