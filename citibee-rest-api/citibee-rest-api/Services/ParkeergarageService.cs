@@ -33,7 +33,17 @@ namespace citibee_rest_api.Services
         {
             try
             {
-                return this._citibeeContext.ReserveringItem.Where(y=>y.ParkeergarageId.Equals(garage)).Select(x => x).ToList();
+                return this._citibeeContext.ReserveringItem
+                    .Join(this._citibeeContext.ReserveringItemType, item => item.ItemTypeId, itemType => itemType.Id, (item, itemType) => new ReserveringItem() {
+                        Barcode = item.Barcode,
+                        Id = item.Id,
+                        ItemType = itemType,
+                        ParkeergarageId=item.ParkeergarageId,
+                        Parkingnr= item.Parkingnr,
+                        ItemTypeId = item.ItemTypeId,
+                        
+                    })
+                    .Where(y=>y.ParkeergarageId.Equals(garage)).ToList();
             }
             catch (Exception e)
             {

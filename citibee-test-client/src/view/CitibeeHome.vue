@@ -3,12 +3,12 @@
    
   <Menubar :gebruiker='gebruiker'></Menubar>
   <CitibeeMap :lijstParkeergarage='parkeergarages'></CitibeeMap>
-  <CustomTabel :velden="itemVelden" ></CustomTabel>
+  <CustomTabel @reserveer="OpenModal" :velden="itemVelden" ></CustomTabel>
   </div>
 </template>
 
 <script>
-//voor de vuetabel alles via de state store
+ 
 import CitibeeMap from '../components/CitibeeMap.vue'
 import Menubar from '../components/Menubar.vue'
  
@@ -21,7 +21,7 @@ export default {
     return{
         parkeergarages:[],
         gebruiker:{},
-        itemVelden:['barcode', 'parkingnr']
+        itemVelden:[{  name: 'actions',  title: 'Acties', titleClass: 'text-center',  dataClass: 'text-center', width: '15% ' },'itemType.naam','barcode', 'parkingnr']
     }
   },
   components: {
@@ -38,7 +38,10 @@ export default {
     me.gebruiker = this.$store.state.gebruiker;
  },
 methods:{
- 
+      OpenModal(obj){
+      //TODO open modal en reserveer een parking
+       var parking = obj
+      }
 }
 
 }
