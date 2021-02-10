@@ -38,9 +38,9 @@ export default {
     me.gebruiker = this.$store.state.gebruiker;
  },
 methods:{
-      OpenModal(obj){
+      OpenModal(){//obj param
       //TODO open modal en reserveer een parking
-       var parking = obj
+        
       }
 }
 
