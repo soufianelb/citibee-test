@@ -28,5 +28,19 @@ namespace citibee_rest_api.Services
             }
         }
 
+        
+        public List<ReserveringItem> AlleReserveringItemsPerGarage(int garage) 
+        {
+            try
+            {
+                return this._citibeeContext.ReserveringItem.Where(y=>y.ParkeergarageId.Equals(garage)).Select(x => x).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Geen ReserveringItem");
+            }
+
+        }
+
     }
 }

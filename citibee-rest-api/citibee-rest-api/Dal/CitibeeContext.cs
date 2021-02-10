@@ -132,6 +132,11 @@ namespace citibee_rest_api.Dal
                     .HasColumnName("barcode")
                     .HasColumnType("character varying");
 
+                entity.Property(e => e.Parkingnr)
+              .IsRequired()
+              .HasColumnName("parkingnr")
+              .HasColumnType("character varying");
+
                 entity.Property(e => e.ItemTypeId).HasColumnName("item_type_id");
 
                 entity.Property(e => e.ParkeergarageId).HasColumnName("parkeergarage_id");

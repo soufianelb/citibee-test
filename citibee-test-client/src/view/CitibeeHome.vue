@@ -3,13 +3,16 @@
   <Sidebar></Sidebar>
   <Menubar :gebruiker='gebruiker'></Menubar>
   <CitibeeMap :lijstParkeergarage='parkeergarages'></CitibeeMap>
+  <CustomTabel :velden="itemVelden" ></CustomTabel>
   </div>
 </template>
 
 <script>
+//voor de vuetabel alles via de state store
 import CitibeeMap from '../components/CitibeeMap.vue'
 import Menubar from '../components/Menubar.vue'
 import Sidebar from '../components/Sidebar.vue'
+import CustomTabel from '../components/CustomTabel.vue'
 import ParkeergarageService from '../services/ParkeergarageService'
     const parkeergarageService = new ParkeergarageService();
 export default {
@@ -17,13 +20,15 @@ export default {
   data(){
     return{
         parkeergarages:[],
-        gebruiker:{}
+        gebruiker:{},
+        itemVelden:['barcode', 'parkingnr']
     }
   },
   components: {
     CitibeeMap,
     Menubar,
-    Sidebar
+    Sidebar,
+    CustomTabel
   },
  created(){
      var me =this;

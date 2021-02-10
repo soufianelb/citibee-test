@@ -16,5 +16,14 @@ export default class ParkeergarageService{
        
     }
  
+    ReserveringItems(id) {
+      const options = {
+        method: 'GET',
+        url:"https://localhost:44390/api/Reserveringitem/Garage?garage="+id
+       
+      };
+    return  axios(options) 
+     
+  }
  
 }  

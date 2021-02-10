@@ -2,9 +2,8 @@
   <div class="map">
     <LMap :zoom="zoom" :center="center">
       <LTileLayer :url="url"></LTileLayer>
-      <div  v-for="item in lijstParkeergarage" :key="item.id">
-    
-      <LMarker :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]"></LMarker>
+      <div v-for="item in lijstParkeergarage" :key="item.id">
+      <LMarker @click="SelecteerGarage(item)" :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]"></LMarker>
     </div>
     </LMap>
   </div>
@@ -13,6 +12,8 @@
 <script>
  
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import ParkeergarageService from '../services/ParkeergarageService'
+    const parkeergarageService = new ParkeergarageService();
 export default {
   name: "CitibeeMap",
   components: {
@@ -29,8 +30,21 @@ export default {
       bounds: null,
       parkeergarages:[]
     };
+  },
+  methods:{
+    
+      SelecteerGarage(garage){
+         
+         var me = this;
+        parkeergarageService.ReserveringItems(garage.id).then((data)=>{
+          me.$store.commit("SelecteerGarageMap",data.data.result );
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
   }
-  
+
+
 
 };
 </script>

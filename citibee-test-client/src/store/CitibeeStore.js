@@ -5,11 +5,13 @@ Vue.use(Vuex);
 export default  new Vuex.Store({
     state: {
         gebruiker: null,
+        parkingItems:null,
         
  
     },
     getters: {
         gebruiker: state => state.gebruiker,
+        parkingItems: state => state.parkingItems,
     },
 
     actions: {
@@ -19,6 +21,11 @@ export default  new Vuex.Store({
 
     mutations: {
        
+        SelecteerGarageMap(state, payload){
+            console.log(payload)
+            state.parkingItems = payload
+
+        }
     }
 });
 

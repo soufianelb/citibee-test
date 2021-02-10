@@ -7,13 +7,11 @@
 
 import Login from './view/Login.vue'
 import CitibeeHome from './view/CitibeeHome.vue'
- 
- 
+
 export default {
   name: 'App',
   data(){
     return{
-     
       gebruikerId:null
     }
   },
