@@ -39,7 +39,7 @@ export default {
    height: 100px; 
     width:100%;
     position: absolute;
-    left: 14%;
+    
     bottom: 0; 
     float:right;
     display: block;
