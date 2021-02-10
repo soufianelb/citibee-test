@@ -13,9 +13,7 @@ export default {
   name: 'App',
   data(){
     return{
-      //dit zou normaal gezien een token moeten zijn
-      //Opslaan in localStorage maar in dit geval maak ik gebruik van op de state/Store om de gebruiker op te slaan
-      //TODO via de state
+     
       gebruikerId:null
     }
   },

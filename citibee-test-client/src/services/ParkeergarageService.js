@@ -5,8 +5,7 @@ export default class ParkeergarageService{
     constructor(){
      // this.axiosWrapper = new AxiosWrapper();
     }
-    //TODO deze functie moet naar async return de data en de catch later opvangen in de root om dan de alertyfy op te roepen 1 keer
-    //create an axios wrappper
+ 
     Parkeergarage() {
         const options = {
           method: 'GET',
