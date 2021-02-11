@@ -39,7 +39,7 @@ export default {
   },
   methods:{
        Reserveer(data){
-          this.$emit('reserveer',data )
+          this.$emit('reserveer',data)
       }
   }
 
