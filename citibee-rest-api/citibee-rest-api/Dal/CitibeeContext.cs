@@ -31,7 +31,8 @@ namespace citibee_rest_api.Dal
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .ValueGeneratedNever();
+                      .IsRequired();
+
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -65,7 +66,7 @@ namespace citibee_rest_api.Dal
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .ValueGeneratedNever();
+                     .IsRequired();
 
                 entity.Property(e => e.Einddatum).HasColumnName("einddatum");
 
