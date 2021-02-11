@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Reflection;
 using citibee_rest_api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -166,6 +170,45 @@ namespace citibee_rest_api.Dal
                     .HasColumnName("naam")
                     .HasColumnType("character varying");
             });
+        }
+
+        //Ik heb hier een extentions geschreven om ook zelf string queries te schrijven
+        //Dit met de bedoeling om aan te tonen dat ik ook gebruik maak van zelf raw sql queries te schrijven
+        public  List<T> VoerQueryUit<T>(string query) where T : class, new()
+        {
+            using (var command = this.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = query;
+                command.CommandType = CommandType.Text;
+
+                this.Database.OpenConnection();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    var lst = new List<T>();
+                    var lstColumnss = new T().GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    var lstColumns = new List<PropertyInfo>(lstColumnss);
+                    while (reader.Read())
+                    {
+                        var newObject = new T();
+                        for (var i = 0; i < reader.FieldCount; i++)
+                        {
+                            var name = reader.GetName(i);
+                            //gebruikmakend van reflections
+                            PropertyInfo prop = lstColumns.FirstOrDefault(a => a.Name.ToLower().Equals(name.ToLower()));
+                            if (prop == null)
+                            {
+                                continue;
+                            }
+                            var val = reader.IsDBNull(i) ? null : reader[i];
+                            prop.SetValue(newObject, val, null);
+                        }
+                        lst.Add(newObject);
+                    }
+
+                    return lst;
+                }
+            }
         }
     }
 }

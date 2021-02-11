@@ -38,6 +38,7 @@ namespace citibee_rest_api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<GebruikerService>();
             services.AddScoped<ParkeergarageService>();
+            services.AddScoped<GereserveerditemService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

@@ -24,6 +24,26 @@ export default class ParkeergarageService{
       };
     return  axios(options) 
      
+    }
+
+    Beschikbaarheid(zoekobj) {
+    const options = {
+      method: 'POST',
+      url:"https://localhost:44390/api/Reserveringitem/CheckBeschikbaar",
+      data:zoekobj
+     
+    };
+  return  axios(options) 
+   
   }
+    BevestigReservatie(obj){
+      const options = {
+        method: 'POST',
+        url:"https://localhost:44390/api/Reserveringitem/Reserveren",
+        data:obj
+       
+      };
+    return  axios(options) 
+    }
  
 }  

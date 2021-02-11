@@ -3,21 +3,31 @@
    <div class="modal" style="display: block;">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <!-- Modal Header -->
+            
                   <div class="modal-header">
                     <h4 class="modal-title">{{reserveringItem.itemType.naam}}-{{reserveringItem.parkingnr}}</h4>
                     <button type="button" class="close" @click="$emit('sluit')" data-dismiss="modal">×</button>
                   </div>
-                  <!-- Modal body -->
+                 
                   <div class="modal-body">
                     <div>
-                        <label for="example-datepicker">Kies een dag</label>
-                        <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>
+                        <label for="example-datepicker">Kies een Datum</label>
+                        <b-form-datepicker id="datepicker" v-model="geselecteerdeDag" class="mb-2"></b-form-datepicker>
                          
+                        <label for="example-datepicker">Kies een Begintijd </label>
+                        <b-form-timepicker id="begin-timepicker" v-model="begintijd" class="mb-2"></b-form-timepicker>
+                        
+                           
+                        <label for="example-datepicker">Kies een Eindtijd </label>
+                        <b-form-timepicker id="eind-timepicker" v-model="eindtijd" class="mb-2"></b-form-timepicker>
                     </div>
-                    <slot></slot>
+                      <button type="button" @click="CheckBeschikbaar()" class="btn btn-primary" data-dismiss="modal">Check</button><br>
+                    <slot v-if="beschikbaar!=null">
+                    <label>Er zijn beschikbare reservaties op deze tijdstip.</label>
+                    <button type="button" @click="Reserveer()" class="btn btn-success" data-dismiss="modal">Bevestig</button>
+                    </slot>
                   </div>
-                  <!-- Modal footer -->
+            
                   <div class="modal-footer">
                     <button type="button" @click="$emit('sluit')" class="btn btn-danger" data-dismiss="modal">Sluiten</button>
                   </div>
@@ -28,7 +38,8 @@
 </template>
 
 <script>
- 
+ import ParkeergarageService from '../services/ParkeergarageService'
+    const parkeergarageService = new ParkeergarageService();
 export default {
   name: "CitibeeModal",
   props:['reserveringItem'],
@@ -37,9 +48,44 @@ export default {
   },     
   data() {
     return {
-      
+      geselecteerdeDag:null,
+      begintijd:null,
+      eindtijd:null,
+      beschikbaar:null,
+      checkBeschikbaarheid:{}
     };
-  }
+  },
+  methods:{
+      CheckBeschikbaar(){
+            var me =this;
+            me.checkBeschikbaarheid={
+            begintijd:new Date(this.geselecteerdeDag + ' ' + this.begintijd),
+            eindtijd:new Date(this.geselecteerdeDag + ' ' + this.eindtijd),
+            parkingId:me.reserveringItem.id
+        };
+        parkeergarageService.Beschikbaarheid(me.checkBeschikbaarheid).then((data)=>{
+            console.log(data)
+           me.beschikbaar = me.checkBeschikbaarheid
+        }).catch((err)=>{console.log(err)})
+      },
+
+     Reserveer(){
+         var gereserveerdeItemm={
+             startDatum:this.checkBeschikbaarheid.begintijd,
+             eindDatum:this.checkBeschikbaarheid.eindtijd,
+             reserveringItemId:this.reserveringItem.id,
+             //dit zou normaal gezien niet mogen: gebruiker mee geven via parameter, moet via token gaan 
+             gebruikerId:this.$store.state.gebruiker.id
+         }
+           parkeergarageService.BevestigReservatie(gereserveerdeItemm).then((data)=>{
+            console.log(data)
+            me.$emit('sluit')
+        }).catch((err)=>{console.log(err)})
+      },
+
+     }   
+
+  
   
 };
 </script>
