@@ -3,7 +3,13 @@
     <LMap :zoom="mapsParams.zoom" :center="mapsParams.center">
       <LTileLayer :url="mapsParams.url"></LTileLayer>
       <div v-for="item in lijstParkeergarage" :key="item.id">
-      <LMarker @click="SelecteerGarage(item)" :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]"></LMarker>
+      <LMarker @click="SelecteerGarage(item)" :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]">
+      <l-icon
+          :icon-size="dynamicSize"
+          :icon-anchor="dynamicAnchor"
+          :icon-url="require('@/assets/images/parking.jpg')"
+        />
+      </LMarker>
     </div>
     </LMap>
   </div>
@@ -11,7 +17,7 @@
 
 <script>
  
-import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LIcon } from "vue2-leaflet";
 import {mapState} from 'vuex'
 import ParkeergarageService from '../services/ParkeergarageService'
     const parkeergarageService = new ParkeergarageService();
@@ -20,7 +26,8 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker
+    LMarker,
+    LIcon
   },
   props: ['lijstParkeergarage', 'mapsParams'],
   data() {

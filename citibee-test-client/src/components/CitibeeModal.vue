@@ -12,7 +12,7 @@
                   <div class="modal-body">
                     <div>
                         <label for="example-datepicker">Kies een Datum</label>
-                        <b-form-datepicker id="datepicker" v-model="geselecteerdeDag" class="mb-2"></b-form-datepicker>
+                        <b-form-datepicker :min="min" id="datepicker" v-model="geselecteerdeDag" class="mb-2"></b-form-datepicker>
                          
                         <label for="example-datepicker">Kies een Begintijd </label>
                         <b-form-timepicker id="begin-timepicker" v-model="begintijd" class="mb-2"></b-form-timepicker>
@@ -47,10 +47,14 @@ export default {
     
   },     
   data() {
+       const nu = new Date()
+       const vandaag = new Date(nu.getFullYear(), nu.getMonth(), nu.getDate())
+       const minDate = new Date(vandaag)
     return {
       geselecteerdeDag:null,
       begintijd:null,
       eindtijd:null,
+      min:minDate,
       beschikbaar:null,
       checkBeschikbaarheid:{}
     };
