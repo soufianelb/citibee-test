@@ -39,8 +39,7 @@ export default {
   methods:{
     
       SelecteerGarage(garage){
-         
-         var me = this;
+        var me = this;
         parkeergarageService.ReserveringItems(garage.id).then((data)=>{
           me.$store.commit("SelecteerGarageMap",data.data.result );
         }).catch((err)=>{

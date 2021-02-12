@@ -1,7 +1,7 @@
 <template>
   <div>
   <Menubar :gebruiker='gebruiker'></Menubar>
-  <Zoekbar :lijstparkings='parkeergarages'></Zoekbar>
+  <Zoekbar @reset="ResetMapTabel" :lijstparkings='parkeergarages'></Zoekbar>
   <CitibeeMap :mapsParams="paramsMap" :lijstParkeergarage='parkeergarages'></CitibeeMap>
   <CustomTabel @reserveer="OpenModal" :velden="itemVelden" ></CustomTabel>
   <CitibeeModal :reserveringItem="selectieReservering" @sluit="Sluiten" v-if="isOpenModal==true"></CitibeeModal>
@@ -56,6 +56,15 @@ methods:{
       Sluiten(){
         this.selectieReservering ={};
         this.isOpenModal = false;
+      },
+      ResetMapTabel(){
+        this.paramsMap = {
+          url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+          zoom: 10,
+          center: [51.2103889,4.425369,13],
+          bounds: null
+         }
+         this.$store.commit('SelecteerGarageMap', ""  )
       }
 }
 
