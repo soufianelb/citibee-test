@@ -1,15 +1,15 @@
 <template>
   <div>
-   
   <Menubar :gebruiker='gebruiker'></Menubar>
-  <CitibeeMap :lijstParkeergarage='parkeergarages'></CitibeeMap>
+  <Zoekbar :lijstparkings='parkeergarages'></Zoekbar>
+  <CitibeeMap :mapsParams="paramsMap" :lijstParkeergarage='parkeergarages'></CitibeeMap>
   <CustomTabel @reserveer="OpenModal" :velden="itemVelden" ></CustomTabel>
   <CitibeeModal :reserveringItem="selectieReservering" @sluit="Sluiten" v-if="isOpenModal==true"></CitibeeModal>
   </div>
 </template>
 
 <script>
- 
+import Zoekbar from '../components/Zoekbar.vue'
 import CitibeeMap from '../components/CitibeeMap.vue'
 import Menubar from '../components/Menubar.vue'
 import CitibeeModal from '../components/CitibeeModal.vue'
@@ -20,6 +20,7 @@ export default {
   name: 'CitibeeHome',
   data(){
     return{
+        paramsMap:{},
         isOpenModal:false,
         parkeergarages:[],
         gebruiker:{},
@@ -31,10 +32,17 @@ export default {
     CitibeeMap,
     Menubar,
     CitibeeModal,
-    CustomTabel
+    CustomTabel,
+    Zoekbar
   },
  created(){
      var me =this;
+     me.paramsMap = {
+      url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      zoom: 10,
+      center: [51.2103889,4.425369,13],
+      bounds: null
+     }
     parkeergarageService.Parkeergarage().then((data)=>{
         me.parkeergarages = data.data.result
     })

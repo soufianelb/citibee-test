@@ -4,6 +4,7 @@ export default class AxiosWrapper{
     constructor(){
       
     }
+    //TODO verder uitwerken
     Request(url, method, data){
         const options = {
             method: method,

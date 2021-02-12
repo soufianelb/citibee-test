@@ -6,12 +6,14 @@ export default  new Vuex.Store({
     state: {
         gebruiker: null,
         parkingItems:null,
+        zoekObject:{}
         
  
     },
     getters: {
         gebruiker: state => state.gebruiker,
         parkingItems: state => state.parkingItems,
+        zoekObject:state=>state.zoekObject
     },
 
     actions: {
@@ -22,9 +24,11 @@ export default  new Vuex.Store({
     mutations: {
        
         SelecteerGarageMap(state, payload){
-            console.log(payload)
             state.parkingItems = payload
 
+        },
+        ZoekZoom(state, payload){
+            state.zoekObject = payload
         }
     }
 });

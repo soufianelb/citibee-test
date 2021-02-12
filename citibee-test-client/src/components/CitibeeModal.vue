@@ -56,7 +56,7 @@ export default {
     };
   },
   methods:{
-      CheckBeschikbaar(){
+     CheckBeschikbaar(){
             var me =this;
             me.checkBeschikbaarheid={
             begintijd:new Date(this.geselecteerdeDag + ' ' + this.begintijd),
@@ -70,6 +70,7 @@ export default {
       },
 
      Reserveer(){
+         var me=this
          var gereserveerdeItemm={
              startDatum:this.checkBeschikbaarheid.begintijd,
              eindDatum:this.checkBeschikbaarheid.eindtijd,

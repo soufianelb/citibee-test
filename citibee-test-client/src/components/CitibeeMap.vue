@@ -1,7 +1,7 @@
 <template>
   <div class="map">
-    <LMap :zoom="zoom" :center="center">
-      <LTileLayer :url="url"></LTileLayer>
+    <LMap :zoom="mapsParams.zoom" :center="mapsParams.center">
+      <LTileLayer :url="mapsParams.url"></LTileLayer>
       <div v-for="item in lijstParkeergarage" :key="item.id">
       <LMarker @click="SelecteerGarage(item)" :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]"></LMarker>
     </div>
@@ -12,6 +12,7 @@
 <script>
  
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import {mapState} from 'vuex'
 import ParkeergarageService from '../services/ParkeergarageService'
     const parkeergarageService = new ParkeergarageService();
 export default {
@@ -21,15 +22,19 @@ export default {
     LTileLayer,
     LMarker
   },
-  props: ['lijstParkeergarage'],
+  props: ['lijstParkeergarage', 'mapsParams'],
   data() {
     return {
-      url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      zoom: 10,
-      center: [51.2103889,4.425369,13],
-      bounds: null,
       parkeergarages:[]
     };
+  },
+  computed:mapState(['zoekObject']), 
+  watch:{
+      zoekObject(){
+        this.mapsParams.zoom =20;
+        this.mapsParams.center = [parseFloat(this.zoekObject.lat),parseFloat(this.zoekObject.lng)]
+        this.SelecteerGarage(this.zoekObject);
+      }
   },
   methods:{
     
