@@ -8,7 +8,7 @@ export default class ParkeergarageService{
     Parkeergarage() {
         const options = {
           method: 'GET',
-          url:"https://localhost:44390/api/Parkeergarage"
+          url:`${process.env.VUE_APP_URLAPI}Parkeergarage`
          
         };
       return  axios(options) 
@@ -18,7 +18,7 @@ export default class ParkeergarageService{
     ReserveringItems(id) {
       const options = {
         method: 'GET',
-        url:"https://localhost:44390/api/Reserveringitem/Garage?garage="+id
+        url:`${process.env.VUE_APP_URLAPI}Reserveringitem/Garage?garage=${id}`
        
       };
     return  axios(options) 
@@ -28,7 +28,7 @@ export default class ParkeergarageService{
     Beschikbaarheid(zoekobj) {
     const options = {
       method: 'POST',
-      url:"https://localhost:44390/api/Reserveringitem/CheckBeschikbaar",
+      url:`${process.env.VUE_APP_URLAPI}Reserveringitem/CheckBeschikbaar`,
       data:zoekobj
      
     };
@@ -38,7 +38,7 @@ export default class ParkeergarageService{
     BevestigReservatie(obj){
       const options = {
         method: 'POST',
-        url:"https://localhost:44390/api/Reserveringitem/Reserveren",
+        url:`${process.env.VUE_APP_URLAPI}Reserveringitem/Reserveren`,
         data:obj
        
       };

@@ -8,7 +8,7 @@ export default class GebruikerService{
    Registreren(gebruiker) {
         const options = {
           method: 'POST',
-          url:"https://localhost:44390/api/Gebruiker/Registreren",
+          url:`${process.env.VUE_APP_URLAPI}Gebruiker/Registreren`,
           data: gebruiker
         };
       return this.axiosWrapper.Request(options.url, options.method, options.data) 
@@ -18,7 +18,7 @@ export default class GebruikerService{
    Login(gebruiker){
       const options = {
         method: 'POST',
-        url:"https://localhost:44390/api/Gebruiker/Aanmelden",
+        url:`${process.env.VUE_APP_URLAPI}Gebruiker/Aanmelden`,
         data: gebruiker
       };
       return this.axiosWrapper.Request(options.url, options.method, options.data)
