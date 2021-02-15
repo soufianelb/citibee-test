@@ -14,8 +14,6 @@ import CitibeeMap from '../components/CitibeeMap.vue'
 import Menubar from '../components/Menubar.vue'
 import CitibeeModal from '../components/CitibeeModal.vue'
 import CustomTabel from '../components/CustomTabel.vue'
-import ParkeergarageService from '../services/ParkeergarageService'
-    const parkeergarageService = new ParkeergarageService();
 export default {
   name: 'CitibeeHome',
   data(){
@@ -35,23 +33,23 @@ export default {
     CustomTabel,
     Zoekbar
   },
- created(){
+  created(){
      var me =this;
      me.paramsMap = {
       url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      zoom: 10,
+      zoom: 9,
       center: [51.2103889,4.425369,13],
       bounds: null
      }
-    parkeergarageService.Parkeergarage().then((data)=>{
+    me.$ParkeergarageService.Parkeergarage().then((data)=>{
         me.parkeergarages = data.data.result
     })
     me.gebruiker = this.$store.state.gebruiker;
  },
-methods:{
+  methods:{
       OpenModal(data){
        this.selectieReservering = data
-        this.isOpenModal = true;
+       this.isOpenModal = true;
       },
       Sluiten(){
         this.selectieReservering ={};

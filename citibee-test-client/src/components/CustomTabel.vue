@@ -16,9 +16,9 @@
 </template>
 
 <script>
- import Vuetable from 'vuetable-2'
+import Vuetable from 'vuetable-2'
 import VuetableCss from '../helpers/VuetableCss.js'
- import { mapState } from 'vuex';
+import { mapState } from 'vuex';
 export default {
   name: "CustomTabel",
   props:['velden'],

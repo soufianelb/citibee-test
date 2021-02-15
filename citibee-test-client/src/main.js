@@ -6,8 +6,7 @@ import Vuex from "vuex";
 import 'leaflet/dist/leaflet.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-
-
+import VueAlertify from 'vue-alertify';
 import { Icon } from "leaflet";
 
 delete Icon.Default.prototype._getIconUrl;
@@ -20,6 +19,7 @@ Icon.Default.mergeOptions({
 
 Vue.use(BootstrapVue);
 Vue.use(Vuex);
+Vue.use(VueAlertify);
 Vue.config.productionTip = false
 
 new Vue({

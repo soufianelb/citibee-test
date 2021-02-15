@@ -31,11 +31,14 @@ namespace citibee_rest_api.Controllers
             try
             {
                 this._gebruikerService.Registreer(gebruiker);
-                return new ApiResponse();
+                return new ApiResponse() { 
+                    Message = "Gebruiker geregistreerd"
+                };
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
-                throw new ApiException(e);
+                throw new ApiException(e.Message);
+                 
             }
         }
         [HttpPost("Aanmelden")]
@@ -46,9 +49,10 @@ namespace citibee_rest_api.Controllers
               var resultaat=  this._gebruikerService.GebruikerByEmailWachtwoord(gebruiker);
                 return new ApiResponse(this._mapper.Map<GebruikerDto>(resultaat));
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
-                throw new ApiException(e.Message, 500);
+                //hier moet nog custom error handeling
+                throw new ApiException(e.Message);
                  
             }
         }

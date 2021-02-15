@@ -25,12 +25,13 @@ namespace citibee_rest_api.Services
                     this._citibeeContext.SaveChanges();
                 }
                 else {
-                    throw new Exception("gebruiker bestaat al met dit email adres");
+                    throw new Exception();
                 }
             }
             catch (Exception e) 
             {
-                throw new Exception();
+                //TODO dit mag normaal niet, zelf error handeling voor schrijven in de service 
+                throw new Exception("fout bij aanmaken van de gebruiker");
             }
             
         }
@@ -40,18 +41,20 @@ namespace citibee_rest_api.Services
             try
             {
              var resultaat= this._citibeeContext.Gebruiker.Where(x => x.Email.Equals(gebruiker.Email)).Where(y=>y.Wachtwoord == gebruiker.Wachtwoord).FirstOrDefault();
+
                 if (resultaat != null)
                 {
                     return resultaat;
                 }
-                else
+                else 
                 {
-                    throw new Exception("Foutieve email en of wachtwoord");
+                    throw new Exception();    
                 }
+                
             }
             catch (Exception e) 
             {
-                throw new Exception("Foutieve email en of wachtwoord");
+                throw new Exception("Wachtwoord en email komen niet overeen");
             }
         }
     }

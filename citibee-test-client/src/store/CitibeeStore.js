@@ -6,14 +6,16 @@ export default  new Vuex.Store({
     state: {
         gebruiker: null,
         parkingItems:null,
-        zoekObject:{}
+        zoekObject:{},
+        paginaLaden: false
         
  
     },
     getters: {
         gebruiker: state => state.gebruiker,
         parkingItems: state => state.parkingItems,
-        zoekObject:state=>state.zoekObject
+        zoekObject:state=>state.zoekObject,
+        paginaLaden:state=>state.paginaLaden
     },
 
     actions: {
@@ -29,6 +31,9 @@ export default  new Vuex.Store({
         },
         ZoekZoom(state, payload){
             state.zoekObject = payload
+        },
+        LaadPagina(state, payload){
+            state.paginaLaden = payload
         }
     }
 });

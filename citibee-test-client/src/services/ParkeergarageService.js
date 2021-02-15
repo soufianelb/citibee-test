@@ -1,9 +1,8 @@
 /* eslint-disable */
 import axios from 'axios';
-//import AxiosWrapper from '../helpers/AxiosWrapper'
 export default class ParkeergarageService{
-    constructor(){
-     // this.axiosWrapper = new AxiosWrapper();
+    constructor(axios){
+     this.axiosWrapper = axios;
     }
  
     Parkeergarage() {

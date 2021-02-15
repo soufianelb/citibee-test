@@ -31,7 +31,7 @@ namespace citibee_rest_api.Controllers
             {
                 return new ApiResponse(this._parkeergarageService.AlleReserveringItemsPerGarage(garage));
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
                 throw new ApiException(e);
             }
@@ -52,7 +52,7 @@ namespace citibee_rest_api.Controllers
                     return new ApiResponse("Parking beschikbaar");
                 }
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
                 throw new ApiException(e);
             }
@@ -67,7 +67,7 @@ namespace citibee_rest_api.Controllers
                 return new ApiResponse();
                
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
                 throw new ApiException(e);
             }

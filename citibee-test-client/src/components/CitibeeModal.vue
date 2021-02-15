@@ -38,8 +38,6 @@
 </template>
 
 <script>
- import ParkeergarageService from '../services/ParkeergarageService'
-    const parkeergarageService = new ParkeergarageService();
 export default {
   name: "CitibeeModal",
   props:['reserveringItem'],
@@ -67,7 +65,7 @@ export default {
             eindtijd:new Date(this.geselecteerdeDag + ' ' + this.eindtijd),
             parkingId:me.reserveringItem.id
         };
-        parkeergarageService.Beschikbaarheid(me.checkBeschikbaarheid).then((data)=>{
+        me.$ParkeergarageService.Beschikbaarheid(me.checkBeschikbaarheid).then((data)=>{
             console.log(data)
            me.beschikbaar = me.checkBeschikbaarheid
         }).catch((err)=>{console.log(err)})
@@ -82,7 +80,7 @@ export default {
              //dit zou normaal gezien niet mogen: gebruiker mee geven via parameter, moet via token gaan 
              gebruikerId:this.$store.state.gebruiker.id
          }
-           parkeergarageService.BevestigReservatie(gereserveerdeItemm).then((data)=>{
+           me.$ParkeergarageService.BevestigReservatie(gereserveerdeItemm).then((data)=>{
             console.log(data)
             me.$emit('sluit')
         }).catch((err)=>{console.log(err)})

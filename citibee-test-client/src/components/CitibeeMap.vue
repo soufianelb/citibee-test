@@ -4,11 +4,7 @@
       <LTileLayer :url="mapsParams.url"></LTileLayer>
       <div v-for="item in lijstParkeergarage" :key="item.id">
       <LMarker @click="SelecteerGarage(item)" :lat-lng="[parseFloat(item.lat),parseFloat(item.lng)]">
-      <l-icon
-          :icon-size="dynamicSize"
-          :icon-anchor="dynamicAnchor"
-          :icon-url="require('@/assets/images/parking.jpg')"
-        />
+      <l-icon :icon-url="require('@/assets/images/parking.jpg')" />
       </LMarker>
     </div>
     </LMap>
@@ -19,8 +15,6 @@
  
 import { LMap, LTileLayer, LMarker, LIcon } from "vue2-leaflet";
 import {mapState} from 'vuex'
-import ParkeergarageService from '../services/ParkeergarageService'
-    const parkeergarageService = new ParkeergarageService();
 export default {
   name: "CitibeeMap",
   components: {
@@ -32,7 +26,7 @@ export default {
   props: ['lijstParkeergarage', 'mapsParams'],
   data() {
     return {
-      parkeergarages:[]
+      
     };
   },
   computed:mapState(['zoekObject']), 
@@ -47,7 +41,7 @@ export default {
     
       SelecteerGarage(garage){
         var me = this;
-        parkeergarageService.ReserveringItems(garage.id).then((data)=>{
+        me.$ParkeergarageService.ReserveringItems(garage.id).then((data)=>{
           me.$store.commit("SelecteerGarageMap",data.data.result );
         }).catch((err)=>{
           console.log(err)

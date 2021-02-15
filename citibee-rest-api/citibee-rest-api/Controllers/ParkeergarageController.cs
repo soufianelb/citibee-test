@@ -27,7 +27,7 @@ namespace citibee_rest_api.Controllers
             {   
                return new ApiResponse(this._parkeergarageService.AlleParkeerGarage());
             }
-            catch (ApiException e)
+            catch (Exception e)
             {
                 throw new ApiException(e);
             }

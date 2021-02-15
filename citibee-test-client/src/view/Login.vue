@@ -45,8 +45,6 @@
 </template>
 
 <script>
- import GebruikerService from '../services/GebruikerService'
-    const gebruikerService = new GebruikerService();
 export default {
   name: 'Login',
    data(){
@@ -69,32 +67,26 @@ export default {
                this.isAanmelden =true;
            }
        },
-        Registreren(){
-        var me = this;
-        if(me.gebruiker){
-            gebruikerService.Registreren(me.gebruiker).then((data)=>{
-                console.log(data)
-                me.gebruiker = {};
-                me.isAanmelden = true;
-            }).catch((err)=>{
-                console.log(err)
-            })
+         Registreren(){
+         var me = this;
+         if(me.gebruiker){
+          me.$GebruikerService.Registreren(me.gebruiker).then(()=>{
+              this.isAanmelden = true;
+          });
             
         }
       },
         Aanmelden(){
         var me = this;
         if(me.gebruiker){
-            gebruikerService.Login(me.gebruiker).then((data)=>{
-                console.log(data)
-              this.$emit("aanmelden", data.data.result)
-            }).catch((err)=>{
-                console.log(err)
-            })
-            
+            me.$GebruikerService.Login(me.gebruiker).then((data)=>{
+            console.log(data)
+            me.$emit("aanmelden", data.result)
+               
+           });
+          
         }
-
-    }
+      }
    }
 }
 </script>
