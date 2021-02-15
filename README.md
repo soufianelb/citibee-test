@@ -1,5 +1,5 @@
 # citibee-test
-- Citibee test project: Dit is een klein test projetje
+- Citibee test project: Dit is een klein test projectje
 
 - Hier kunt u de documentatie vinden voor Citibee-test project.
 
